@@ -1,0 +1,53 @@
+# ------------------------
+# OS / Editor
+# ------------------------
+.DS_Store
+Thumbs.db
+
+.vscode/
+.idea/
+
+# ------------------------
+# Python
+# ------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 가상환경
+.venv/
+venv/
+env/
+ENV/
+
+# 패키지/빌드 아티팩트
+dist/
+build/
+*.egg-info/
+
+# 테스트/툴 캐시
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+.cache/
+
+# 주피터
+.ipynb_checkpoints/
+
+# ------------------------
+# 프로젝트 관련
+# ------------------------
+# 환경 변수
+.env
+.env.*
+
+# 로그 / 임시 데이터
+logs/
+*.log
+tmp/
+temp/
+
+# 로컬 데이터 (원시 수집 데이터 있으면 여기로)
+data/raw/
+data/tmp/
