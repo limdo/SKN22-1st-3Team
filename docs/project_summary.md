@@ -17,7 +17,6 @@
 * 네이버 데이터랩 검색량
 * 구글 트렌드 비교 지수
 * 다나와 모델 조회수
-* 현대/기아 공식 API 기반 페이지 호출 수(선택)
 
 **특징 및 주의점**
 
@@ -74,7 +73,7 @@ rank = 50 → 0.0
 
 ---
 
-## 3. 공공데이터 활용 가이드
+## 3. 공공데이터 활용 가이드(선택)
 
 보급률 산식에 직접 반영하기는 어렵지만, 아래 목적에서는 충분히 의미 있는 데이터로 활용 가능하다.
 
@@ -113,8 +112,6 @@ rank = 50 → 0.0
 
 ## 5. 데이터 소스 목록
 
-* 현대자동차 API: [https://developers.hyundai.com/web/v1/hyundai/data_api](https://developers.hyundai.com/web/v1/hyundai/data_api)
-* 기아자동차 API: [https://developers.kia.com/web/v1/kia/data_api](https://developers.kia.com/web/v1/kia/data_api)
 * 다나와 판매실적: [https://auto.danawa.com/newcar/?Work=record](https://auto.danawa.com/newcar/?Work=record)
 * 네이버 데이터랩: [https://developers.naver.com/docs/serviceapi/datalab/search/](https://developers.naver.com/docs/serviceapi/datalab/search/)
 * 구글 트렌드(검색 관심도 비교): [https://trends.google.com/](https://trends.google.com/)
@@ -126,7 +123,7 @@ rank = 50 → 0.0
 
 1. 분석 지표 및 범위 정의
 2. DB 스키마 설계
-3. 데이터 수집 자동화 파이프라인 구축
+3. 데이터 수집 및 자동화 파이프라인 구축(옵션)
 4. 스펙/모델명 정규화 및 매핑
 5. 관심도 및 보급률 지표 산출
 6. 공공데이터를 통한 시장 흐름 보정
@@ -139,4 +136,4 @@ rank = 50 → 0.0
 * 관심도는 검색량·조회수 기반 지수.
 * 보급률은 다나와 판매실적 기반 시장 점유율.
 * 공공데이터는 직접적 보급률 계산에는 적합하지 않으나, **시장 전체 흐름 설명·보정·확장 분석**에 매우 유용.
-* 현대·기아 API, 다나와, 네이버 데이터랩, 구글 트렌드를 통합하여 모델별 트렌드 분석 수행.
+* 다나와, 네이버 데이터랩, 구글 트렌드를 통합하여 모델별 트렌드 분석 수행.
