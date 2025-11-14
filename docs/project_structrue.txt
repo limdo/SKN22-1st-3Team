@@ -1,0 +1,89 @@
+car-market-trend/
+├── README.md
+├── .gitignore
+├── requirements.txt
+├── .env                        # DB/API 키 등
+│
+├── config/
+│   ├── settings.yaml           # DB, 경로, API 등 설정
+│   └── logger.yaml             # 로그 설정(선택)
+│
+├── docs/
+│   ├── project_summary.md
+│   ├── db_schema_and_erd.md
+│   ├── erd.md
+│   ├── page_specification.md
+│   └── naver_blog_wordcloud_feature.md
+│
+├── data/
+│   ├── raw/                    # 원본 수집 데이터 (CSV/엑셀)
+│   │   ├── naver/              # 네이버 데이터랩 / 블로그 검색 결과 원본
+│   │   ├── google/             # 구글 트렌드 주간 데이터
+│   │   ├── danawa/             # 다나와 판매실적/인기순 수집 파일
+│   │   ├── public/             # 공공데이터 원본
+│   │   └── images_raw/         # 다나와 이미지 원본 다운로드
+│   │
+│   ├── interim/                # 전처리 중간 결과 (정제된 파일)
+│   ├── processed/              # 모델이 사용할 최종 정규화 데이터
+│   └── wordcloud/              # 생성된 워드클라우드 이미지
+│
+├── logs/
+│   └── etl/                    # ETL 실행 로그
+│
+├── src/
+│   ├── __init__.py
+│   │
+│   ├── db/
+│   │   ├── connection.py       # SQLAlchemy/MySQL 엔진 생성
+│   │   ├── init_schema.sql     # DDL (문서의 테이블 생성 SQL)
+│   │   └── utils.py            # 공통 DB 유틸
+│   │
+│   ├── etl/                    # 데이터 적재 / 정규화 스크립트
+│   │   ├── car_model/
+│   │   │   ├── fetch_car_model_list.py   # 최초 다나와 모델 목록 크롤링
+│   │   │   ├── load_car_model_master.py  # CSV→DB 적재
+│   │   │   └── fetch_car_model_images.py # 이미지 수집
+│   │   │
+│   │   ├── interest/
+│   │   │   ├── load_naver_interest.py     # 네이버 데이터랩 월별→DB
+│   │   │   ├── google_trend_utils.py      # 주간→월간 변환 함수
+│   │   │   └── load_google_trend.py       # 구글 트렌드→DB
+│   │   │
+│   │   ├── sales/
+│   │   │   └── load_danawa_sales.py       # 다나와 판매 실적→DB
+│   │   │
+│   │   ├── blog/
+│   │   │   ├── naver_blog_search.py       # 네이버 블로그 검색 API
+│   │   │   ├── fetch_blog_posts.py        # 블로그 본문 크롤링
+│   │   │   ├── tokenize_blog_content.py   # 형태소 분석 (MeCab 등)
+│   │   │   ├── generate_wordcloud.py      # 워드클라우드 이미지 생성
+│   │   │   └── load_blog_to_db.py         # 전체 blog_article/blog_token/blog_wordcloud 적재
+│   │   │
+│   │   ├── public/
+│   │   │   └── load_public_data.py        # 등록현황 → market_monthly_summary
+│   │   │
+│   │   └── run_all_etl.py                 # 전체 ETL 실행(월별 배치)
+│   │
+│   ├── dashboard/
+│   │   ├── Home.py               # 시장 개요 페이지
+│   │   ├── ModelList.py          # 모델 목록 페이지
+│   │   ├── ModelDetail.py        # 상세 분석 페이지
+│   │   ├── Admin.py              # ETL 실행 페이지
+│   │   └── components/           # UI 컴포넌트 모음
+│   │       ├── model_card.py
+│   │       └── charts.py
+│   │
+│   ├── app.py                    # Streamlit 진입점
+│   └── constants.py              # 상수, 공통 변수
+│
+├── notebooks/
+│   ├── eda/
+│   │   ├── 01_hyundai_kia_eda.ipynb
+│   │   ├── 02_danawa_sales_eda.ipynb
+│   │   ├── 03_interest_trend_eda.ipynb
+│   │   ├── 04_public_data_eda.ipynb
+│   │   └── 05_blog_wordcloud_eda.ipynb
+│   └── sandbox/
+│
+└── scripts/
+    └── init_db.sh                # DB 생성 & init_schema.sql 실행 스크립트

@@ -49,5 +49,5 @@ tmp/
 temp/
 
 # 로컬 데이터 (원시 수집 데이터 있으면 여기로)
-data/raw/
-data/tmp/
+# data/raw/
+# data/tmp/
