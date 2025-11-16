@@ -100,7 +100,6 @@ erDiagram
     CAR_MODEL ||--o{ BLOG_WORDCLOUD : "1:N"
 ```
 
-
 ## 1. 공통 개념
 
 - 기본 단위: **차량 모델 × 월(month)**.
@@ -155,6 +154,7 @@ CREATE TABLE car_model (
 Streamlit에서 모델 목록을 보여줄 때 **썸네일 이미지도 같이 보여주기 위한 테이블**.
 
 > 이미지 저장 전략은 2단계로 둘 수 있음:
+>
 > 1. **원본 URL + 로컬/버킷 경로만 DB에 저장** (권장)
 > 2. 필요하면 `image_binary`에 썸네일 바이너리까지 저장 (용량 커질 수 있음)
 
@@ -162,14 +162,14 @@ Streamlit에서 모델 목록을 보여줄 때 **썸네일 이미지도 같이 �
 CREATE TABLE car_model_image (
     image_id        INT UNSIGNED AUTO_INCREMENT PRIMARY KEY COMMENT '이미지 ID',
     model_id        INT UNSIGNED NOT NULL COMMENT 'car_model.model_id FK',
-    
+
     image_url       VARCHAR(500) NOT NULL COMMENT '다나와에서 가져온 원본 이미지 URL',
     local_path      VARCHAR(500) NULL COMMENT '다운로드 받은 로컬/버킷 경로 (선택)',
     content_type    VARCHAR(100) NULL COMMENT 'MIME 타입 (예: image/jpeg)',
-    
+
     -- 필요 시 사용 (썸네일 정도의 작은 이미지로만 저장하는 것을 추천)
     image_binary    LONGBLOB     NULL COMMENT '이미지 바이너리 (썸네일 수준, 선택)',
-    
+
     is_primary      TINYINT(1) NOT NULL DEFAULT 1 COMMENT '대표 이미지 여부 (1=대표, 0=기타)',
     created_at      TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '레코드 생성 시각',
 
@@ -228,7 +228,7 @@ CREATE TABLE model_monthly_sales (
     id                 INT UNSIGNED AUTO_INCREMENT PRIMARY KEY COMMENT 'PK',
     model_id           INT UNSIGNED NOT NULL COMMENT 'car_model.model_id FK',
     month              DATE NOT NULL COMMENT '기준 월',
-    
+
     sales_units        INT NOT NULL COMMENT '해당 모델의 월 판매량(대수)',
     market_total_units INT NULL COMMENT '같은 기준의 총 판매량 (현대+기아 또는 전체 시장, 선택)',
     adoption_rate      DECIMAL(7,4) NULL COMMENT '보급률 (sales_units / market_total_units, 선택)',
@@ -272,6 +272,7 @@ CREATE TABLE market_monthly_summary (
 ### 5-1. `blog_article`
 
 네이버 블로그 검색 결과 상위 3개 글 메타 + 정제 텍스트.
+-> 컬럼명 부적절함: rank -> search_rank로 바꿨음.
 
 ```sql
 CREATE TABLE blog_article (
@@ -301,6 +302,7 @@ CREATE TABLE blog_article (
 ### 5-2. `blog_token_monthly`
 
 모델 × 월 단위 토큰(명사 등) 빈도 집계.
+-> 컬럼명 부적절함: rank -> token_rank로 바꿨음.
 
 ```sql
 CREATE TABLE blog_token_monthly (

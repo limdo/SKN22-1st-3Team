@@ -1,18 +1,5 @@
-# 기본 HTTP 요청
-requests>=2.31.0
-
-# 환경 변수 로딩
 python-dotenv>=1.0.1
-
-# YAML 설정 로딩
 PyYAML>=6.0.1
-
-# 날짜/시간 편의 (나중에 필요 시)
-python-dateutil>=2.9.0
-
-# # 타입 힌트 관련 (선택)
-# typing-extensions>=4.12.2
-
-# # 개발용 (선택)
-# black>=24.3.0
-# flake8>=7.1.1
+sqlalchemy
+pymysql
+pandas
