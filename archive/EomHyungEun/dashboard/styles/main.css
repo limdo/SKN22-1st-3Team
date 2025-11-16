@@ -1,0 +1,136 @@
+/* -----------------------------------------------------------
+   GLOBAL RESET
+----------------------------------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    font-family: "Inter", "Apple SD Gothic Neo", sans-serif;
+    scroll-behavior: smooth;
+}
+
+/* 기본 Page Wrapper */
+.page-wrapper {
+    padding: 10px 40px 60px 40px;
+}
+
+/* -----------------------------------------------------------
+   TITLES
+----------------------------------------------------------- */
+
+.page-title {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #1d1d1d;
+}
+
+.section-title {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 18px;
+    color: #333;
+    border-left: 0px;
+    padding-left: 12px;
+}
+
+/* -----------------------------------------------------------
+   CARD LAYOUT
+----------------------------------------------------------- */
+
+
+/* -----------------------------------------------------------
+   STREAMLIT COMPONENTS TUNE
+----------------------------------------------------------- */
+
+/* SELECTBOX, TEXT INPUT */
+.stSelectbox > div,
+.stDateInput > div,
+.stTextInput > div {
+    border-radius: 12px !important;
+    background: transparent !important;
+    padding: 5px 8px !important;
+}
+
+/* LABEL REFINEMENTS */
+.stSelectbox label, 
+.stTextInput label {
+    font-weight: 600 !important;
+    margin-bottom: 6px !important;
+}
+
+/* CHARTS */
+.stPlotlyChart, .stAltairChart, .stPyplot {
+    border-radius: 14px;
+    padding: 18px;
+    background: transparent;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+}
+
+/* IMAGES */
+.stImage img {
+    border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+/* GRID IMAGE CARD */
+.image-grid img {
+    border-radius: 12px;
+}
+
+/* -----------------------------------------------------------
+   FILTER ICON
+----------------------------------------------------------- */
+.filter-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.filter-title::before {
+    content: "🔍";
+    font-size: 26px;
+    margin-right: 8px;
+}
+
+/* -----------------------------------------------------------
+   FOOTER / SPACING
+----------------------------------------------------------- */
+.footer-space {
+    margin-top: 80px;
+}
+
+
+/* Sidebar 제목 */
+.sidebar-title {
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+/* Sidebar 전체 스타일 */
+section[data-testid="stSidebar"] {
+    background-color: transparent !important;
+    border-right: 1px solid #e5e7eb;
+}
+
+section[data-testid="stSidebar"] .css-1d391kg {
+    padding-top: 20px;
+}
+
+/* Selectbox, Button 공통 UI 개선 */
+.stSelectbox, .stButton > button, .stTextInput > div > input {
+    border-radius: 10px !important;
+    height: 45px;
+}
+
+/* Selectbox 간격 넓히기 */
+div.stSelectbox {
+    margin-bottom: 22px !important;   /* 원하는 값으로 조절 */
+}
