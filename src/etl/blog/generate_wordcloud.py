@@ -5,10 +5,11 @@ from __future__ import annotations
 import argparse
 import datetime
 from pathlib import Path
-from typing import Dict, List, Tuple, Any
+from typing import Dict, List, Tuple, Any, Optional
 
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
+from matplotlib import font_manager as fm
 
 from sqlalchemy import text
 
@@ -17,6 +18,40 @@ from src.db.connection import get_engine
 
 BASE_DIR = Path(__file__).resolve().parents[3]
 
+DEFAULT_FONT_CANDIDATES = [
+    "NanumGothic",
+    "NanumSquare",
+    "AppleGothic",
+    "Malgun Gothic",
+    "Noto Sans CJK KR",
+    "Arial Unicode MS",
+]
+
+
+def resolve_font_path(font_path: Optional[str]) -> Optional[str]:
+    """
+    사용자가 지정한 폰트 경로가 있으면 그대로 사용한다.
+    없으면 시스템에 설치된 한글 폰트 후보를 탐색해 반환한다.
+    """
+    if font_path:
+        candidate = Path(font_path).expanduser()
+        if candidate.exists():
+            return str(candidate)
+        print(f"[WARN] 지정한 폰트 경로를 찾을 수 없습니다: {candidate}")
+
+    for font_name in DEFAULT_FONT_CANDIDATES:
+        try:
+            resolved = fm.findfont(font_name, fallback_to_default=False)
+            if resolved and Path(resolved).exists():
+                print(f"[INFO] '{font_name}' 폰트를 사용합니다: {resolved}")
+                return resolved
+        except Exception:
+            continue
+
+    # 최종적으로 matplotlib 기본 폰트 경로라도 사용
+    fallback = fm.findfont(fm.FontProperties())
+    print(f"[WARN] 한글 폰트를 찾지 못해 기본 폰트를 사용합니다: {fallback}")
+    return fallback
 
 def parse_month_arg(month_str: str | None) -> datetime.date:
     """--month 가 없으면 오늘 기준으로 YYYY-MM-01, 있으면 그 값으로."""
@@ -155,8 +190,10 @@ def generate_wordcloud_image(
     if not tokens:
         return
 
+    resolved_font = resolve_font_path(font_path)
+
     wc = WordCloud(
-        font_path=font_path,
+        font_path=resolved_font,
         width=width,
         height=height,
         background_color="white",
